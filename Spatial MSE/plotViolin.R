@@ -8,7 +8,7 @@ plotViolin <-function(data){
   df <- obj.plot.v # 
   
   
-  cols <- PNWColors::pnw_palette('Starfish',n = length(unique(df$HCR)), type = 'discrete')
+  cols <- PNWColors::pnw_palette('Starfish',n = length(unique(df$HCR)), type = 'continuous')
   
   # Remove the 5th and 5th percentiles from df 
   vars <- unique(df$variable)

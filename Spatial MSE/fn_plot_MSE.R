@@ -14,7 +14,7 @@ if(is.na(pidx)){
 
 obj.plot <- list()
 #cols <- brewer.pal(6, 'Dark2')
-cols <- PNWColors::pnw_palette('Starfish',n = length(nms), type = 'discrete')
+cols <- PNWColors::pnw_palette('Starfish',n = length(nms), type = 'continuous')
 
 
 for(i in 1:length(nms)){
@@ -285,7 +285,7 @@ df.SSB$run <- factor(df.SSB$run, levels = nms[pidx])
 
 p6 <- ggplot(df.SSB, aes(x = year, y = med.can*1e-6))+geom_line(color = 'red', size = 1.2)+
   geom_line(aes(y = med.US*1e-6), color = 'blue', size = 1.2)+
-  theme_classic()+scale_y_continuous(name ='SSB (m tonnes)\nmidyear')+facet_wrap(~run, scale = 'free')+  
+  theme_classic()+scale_y_continuous(name ='SSB (m tonnes)\nmidyear')+facet_wrap(~run, scales = 'fixed')+  
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   geom_ribbon(aes(ymin = p5.can*1e-6, ymax = p95.can*1e-6), fill = alpha('red', alpha = 0.2), linetype = 0)+
   geom_ribbon(aes(ymin = p5.US*1e-6, ymax = p95.US*1e-6), fill = alpha('blue', alpha = 0.2), linetype = 0)
@@ -373,7 +373,7 @@ for(i in 1:length(nms)){
 }
 
 p9  <- ggplot(se.plot[se.plot$year > 2014,], aes(x = year, y = E5))+theme_classic()+
-  geom_line(size = 1.5)+facet_wrap(~name)+geom_hline(yintercept = 0.0, linetype = 2)+
+  geom_line(size = 1.5)+facet_wrap(~name, scales="fixed")+geom_hline(yintercept = 0.0, linetype = 2)+
   geom_ribbon(aes(ymin =E05, ymax = E95), fill = alpha('gray', alpha = 0.5))+
   scale_y_continuous(name = 'Standard error')+
   coord_cartesian(ylim = c(-0.5,0.5))
